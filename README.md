@@ -1,3 +1,5 @@
+![](https://s1.gifyu.com/images/nLJguQ9---Imgur.gif)
+
 ## Protobuf
 
 Requirements: protoc-gen-go, protoc-gen-go-grpc
@@ -8,3 +10,9 @@ protoc --go_out=. --go_opt=paths=source_relative \
     proto/*.proto
 ```
 
+## Migrations
+```
+go build .
+./atlas-linux-amd64-latest migrate validate migrations
+./supernova migrate
+```
