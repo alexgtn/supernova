@@ -1,0 +1,26 @@
+# https://taskfile.dev
+
+version: '3'
+
+tasks:
+  pb:
+    cmds:
+      - protoc --go_out=. --go_opt=paths=source_relative --go-grpc_out=. --go-grpc_opt=paths=source_relative proto/*.proto
+
+  execute-migration:
+    cmds:
+      - go build .
+      - ./supernova execute-migration
+
+  generate-migration:
+    cmds:
+      - go build .
+      - ./supernova execute-migration
+
+  validate-migration:
+    cmds:
+      - ./atlas-linux-amd64-latest migrate validate migrations
+
+  rehash-migration:
+    cmds:
+      - ./atlas-linux-amd64-latest migrate hash --force
