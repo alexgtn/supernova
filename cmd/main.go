@@ -36,7 +36,7 @@ to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("main called")
 
-		client := postgres.OpenEnt("postgresql://default:default@localhost:5432/postgres?sslmode=disable")
+		client := postgres.OpenEnt("postgresql://default:default@postgres:5432/postgres?sslmode=disable")
 		flag.Parse()
 
 		lis, err := net.Listen("tcp", fmt.Sprintf(":%d", *port))

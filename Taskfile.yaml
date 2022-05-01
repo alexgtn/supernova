@@ -25,8 +25,8 @@ tasks:
 
   validate-migration:
     cmds:
-      - ./atlas-linux-amd64-latest migrate validate migrations
+      - ./atlas-linux-amd64 migrate validate migrations
 
   rehash-migration:
     cmds:
-      - ./atlas-linux-amd64-latest migrate hash --force
+      - ./atlas-linux-amd64 migrate hash --force

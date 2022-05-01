@@ -1,0 +1,39 @@
+services:
+  reverse-proxy:
+    # The official v2 Traefik docker image
+    image: traefik:v2.7
+    # Enables the web UI and tells Traefik to listen to docker
+    command:
+      - "--api.insecure=true"
+      - "--providers.docker"
+      - "--entrypoints.main.address=:50051"
+    ports:
+      - "80:80"
+      - "50051:50051"
+      # The Web UI (enabled by --api.insecure=true)
+      - "8080:8080"
+    volumes:
+      # So that Traefik can listen to the Docker events
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  main:
+    build: .
+    labels:
+      - "traefik.http.routers.main.rule=Host(`localhost`)"
+      - "traefik.http.routers.main.entrypoints=main"
+      - "traefik.http.services.main.loadbalancer.server.scheme=h2c"
+      - "traefik.http.services.main.loadbalancer.server.port=50051"
+
+  postgres:
+    image: postgres:13-alpine
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: default
+      POSTGRES_PASSWORD: default
+    healthcheck:
+      test: "pg_isready --username=default && psql --username=default --list"
+      interval: 10s
+      timeout: 5s
+      retries: 5
