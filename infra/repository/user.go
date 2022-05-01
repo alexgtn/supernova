@@ -32,3 +32,25 @@ func (r *userRepo) GetByID(ctx context.Context, id int) (*user.User, error) {
 
 	return dto, nil
 }
+
+func (r *userRepo) Create(ctx context.Context, age int, name string) (*user.User, error) {
+	u, err := r.client.User.
+		Create().
+		SetName(name).
+		SetAge(age).
+		Save(ctx)
+	if err != nil {
+		_, ok := err.(*ent.NotFoundError)
+		if ok {
+			return nil, nil
+		}
+		return nil, errors.Wrap(err, "error creating user")
+	}
+
+	dto, err := user.NewUser(u.ID, u.Age, u.Name)
+	if err != nil {
+		return nil, errors.Wrapf(err, "failed to get user entity %d", u.ID)
+	}
+
+	return dto, nil
+}

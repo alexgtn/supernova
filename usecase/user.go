@@ -11,6 +11,7 @@ import (
 
 type userRepo interface {
 	GetByID(ctx context.Context, id int) (*user.User, error)
+	Create(ctx context.Context, age int, name string) (*user.User, error)
 }
 
 type server struct {
@@ -24,11 +25,23 @@ func NewUserService(r userRepo) *server {
 	}
 }
 
+func (s *server) Create(ctx context.Context, in *pb.CreateUserRequest) (*pb.OneUserReply, error) {
+	u, err := s.userRepo.Create(ctx, int(in.Age), in.Name)
+	if err != nil {
+		return nil, status.Errorf(codes.Internal, errors.Wrapf(err, "error creating user with data %s", in.String()).Error())
+	}
+
+	return &pb.OneUserReply{
+		Id:   uint32(u.GetID()),
+		Age:  uint32(u.GetAge()),
+		Name: u.GetName(),
+	}, nil
+}
+
 func (s *server) GetOne(ctx context.Context, in *pb.OneUserRequest) (*pb.OneUserReply, error) {
 	u, err := s.userRepo.GetByID(ctx, int(in.GetId()))
 	if err != nil {
-		return nil, status.Errorf(codes.Internal,
-			errors.Wrapf(err, "error getting the user with id %d", in.GetId()).Error())
+		return nil, status.Errorf(codes.Internal, errors.Wrapf(err, "error getting the user with id %d", in.GetId()).Error())
 	}
 
 	return &pb.OneUserReply{
