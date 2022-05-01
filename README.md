@@ -1,18 +1,25 @@
 ![](https://s1.gifyu.com/images/nLJguQ9---Imgur.gif)
 
+## Start service
+
+`./task main`
+
 ## Protobuf
 
 Requirements: protoc-gen-go, protoc-gen-go-grpc
 
 ```
-protoc --go_out=. --go_opt=paths=source_relative \
-    --go-grpc_out=. --go-grpc_opt=paths=source_relative \
-    proto/*.proto
+./task pb
 ```
 
 ## Migrations
 ```
-go build .
-./atlas-linux-amd64-latest migrate validate migrations
-./supernova migrate
+./task generate-migration
+./task execute-migration
+```
+
+Optional 
+```
+./task validate-migration
+./task rehash-migration
 ```
