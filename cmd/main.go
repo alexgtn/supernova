@@ -49,8 +49,8 @@ to quickly create a Cobra application.`,
 			log.Fatalf("failed to listen: %v", err)
 		}
 
-		var zapconfig zap.Config
-		zapconfig = zap.NewProductionConfig()
+		// logging
+		zapconfig := zap.NewProductionConfig()
 		zapconfig.EncoderConfig.EncodeTime = zapcore.ISO8601TimeEncoder
 
 		logger, err := zapconfig.Build()
@@ -60,12 +60,16 @@ to quickly create a Cobra application.`,
 
 		// always log req/res payload
 		alwaysLoggingDeciderServer := func(ctx context.Context, fullMethodName string, servingObject interface{}) bool { return true }
+
+		// grpc server with middleware
 		s := grpc.NewServer(grpc.UnaryInterceptor(
 			grpc_middleware.ChainUnaryServer(
 				grpc_zap.UnaryServerInterceptor(logger),
 				grpc_zap.PayloadUnaryServerInterceptor(logger, alwaysLoggingDeciderServer),
 			),
 		))
+
+		// dependency injection
 		userRepo := repository.NewUser(client)
 		userUsecase := usecase.NewUserService(userRepo)
 		pb.RegisterUserServiceServer(s, userUsecase)
@@ -81,14 +85,4 @@ to quickly create a Cobra application.`,
 
 func init() {
 	rootCmd.AddCommand(mainCmd)
-
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// mainCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// mainCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
