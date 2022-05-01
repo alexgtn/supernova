@@ -21,6 +21,7 @@ tasks:
     cmds:
       - go build .
       - ./supernova generate-migration
+      - go generate ./ent
 
   validate-migration:
     cmds:

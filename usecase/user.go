@@ -7,6 +7,7 @@ import (
 	"github.com/pkg/errors"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
+	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
 type userRepo interface {
@@ -32,9 +33,10 @@ func (s *server) Create(ctx context.Context, in *pb.CreateUserRequest) (*pb.OneU
 	}
 
 	return &pb.OneUserReply{
-		Id:   uint32(u.GetID()),
-		Age:  uint32(u.GetAge()),
-		Name: u.GetName(),
+		Id:        uint32(u.GetID()),
+		Age:       uint32(u.GetAge()),
+		Name:      u.GetName(),
+		CreatedAt: timestamppb.New(u.GetCreatedAt()),
 	}, nil
 }
 
@@ -45,8 +47,9 @@ func (s *server) GetOne(ctx context.Context, in *pb.OneUserRequest) (*pb.OneUser
 	}
 
 	return &pb.OneUserReply{
-		Id:   uint32(u.GetID()),
-		Age:  uint32(u.GetAge()),
-		Name: u.GetName(),
+		Id:        uint32(u.GetID()),
+		Age:       uint32(u.GetAge()),
+		Name:      u.GetName(),
+		CreatedAt: timestamppb.New(u.GetCreatedAt()),
 	}, nil
 }

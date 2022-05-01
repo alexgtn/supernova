@@ -4,6 +4,8 @@ option go_package = ".;user";
 
 package user;
 
+import "google/protobuf/timestamp.proto";
+
 service UserService {
   rpc GetOne (OneUserRequest) returns (OneUserReply) {}
   rpc Create (CreateUserRequest) returns (OneUserReply) {}
@@ -17,6 +19,7 @@ message OneUserReply {
   uint32 id = 1;
   uint32 age = 2;
   string name = 3;
+  google.protobuf.Timestamp created_at = 4;
 }
 
 message CreateUserRequest {

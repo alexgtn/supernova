@@ -3,6 +3,7 @@ package schema
 import (
 	"entgo.io/ent"
 	"entgo.io/ent/schema/field"
+	"time"
 )
 
 // User holds the schema definition for the User entity.
@@ -15,6 +16,9 @@ func (User) Fields() []ent.Field {
 	return []ent.Field{
 		field.Int("age").Positive(),
 		field.String("name").Default("unknown"),
+		field.Time("created_at").
+			Default(time.Now).
+			Immutable(),
 	}
 }
 

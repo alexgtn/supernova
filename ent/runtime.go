@@ -3,6 +3,8 @@
 package ent
 
 import (
+	"time"
+
 	"github.com/alexgtn/supernova/ent/schema"
 	"github.com/alexgtn/supernova/ent/user"
 )
@@ -21,4 +23,8 @@ func init() {
 	userDescName := userFields[1].Descriptor()
 	// user.DefaultName holds the default value on creation for the name field.
 	user.DefaultName = userDescName.Default.(string)
+	// userDescCreatedAt is the schema descriptor for created_at field.
+	userDescCreatedAt := userFields[2].Descriptor()
+	// user.DefaultCreatedAt holds the default value on creation for the created_at field.
+	user.DefaultCreatedAt = userDescCreatedAt.Default.(func() time.Time)
 }

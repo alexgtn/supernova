@@ -25,7 +25,7 @@ func (r *userRepo) GetByID(ctx context.Context, id int) (*user.User, error) {
 		return nil, errors.Wrapf(err, "error fetching user %d", id)
 	}
 
-	dto, err := user.NewUser(u.ID, u.Age, u.Name)
+	dto, err := user.NewUser(u.ID, u.Age, u.Name, u.CreatedAt)
 	if err != nil {
 		return nil, errors.Wrapf(err, "failed to get user entity %d", id)
 	}
@@ -47,7 +47,7 @@ func (r *userRepo) Create(ctx context.Context, age int, name string) (*user.User
 		return nil, errors.Wrap(err, "error creating user")
 	}
 
-	dto, err := user.NewUser(u.ID, u.Age, u.Name)
+	dto, err := user.NewUser(u.ID, u.Age, u.Name, u.CreatedAt)
 	if err != nil {
 		return nil, errors.Wrapf(err, "failed to get user entity %d", u.ID)
 	}
