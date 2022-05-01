@@ -5,13 +5,18 @@ Copyright © 2022 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
+	"context"
 	"flag"
 	"fmt"
 	"github.com/alexgtn/supernova/infra/postgres"
 	"github.com/alexgtn/supernova/infra/repository"
 	pb "github.com/alexgtn/supernova/proto"
 	"github.com/alexgtn/supernova/usecase"
+	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"
+	grpc_zap "github.com/grpc-ecosystem/go-grpc-middleware/logging/zap"
 	"github.com/spf13/cobra"
+	"go.uber.org/zap"
+	"go.uber.org/zap/zapcore"
 	"log"
 	"net"
 
@@ -44,7 +49,23 @@ to quickly create a Cobra application.`,
 			log.Fatalf("failed to listen: %v", err)
 		}
 
-		s := grpc.NewServer()
+		var zapconfig zap.Config
+		zapconfig = zap.NewProductionConfig()
+		zapconfig.EncoderConfig.EncodeTime = zapcore.ISO8601TimeEncoder
+
+		logger, err := zapconfig.Build()
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		// always log req/res payload
+		alwaysLoggingDeciderServer := func(ctx context.Context, fullMethodName string, servingObject interface{}) bool { return true }
+		s := grpc.NewServer(grpc.UnaryInterceptor(
+			grpc_middleware.ChainUnaryServer(
+				grpc_zap.UnaryServerInterceptor(logger),
+				grpc_zap.PayloadUnaryServerInterceptor(logger, alwaysLoggingDeciderServer),
+			),
+		))
 		userRepo := repository.NewUser(client)
 		userUsecase := usecase.NewUserService(userRepo)
 		pb.RegisterUserServiceServer(s, userUsecase)
