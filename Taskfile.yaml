@@ -15,7 +15,7 @@ tasks:
   generate-migration:
     cmds:
       - go build .
-      - ./supernova execute-migration
+      - ./supernova generate-migration
 
   validate-migration:
     cmds:
