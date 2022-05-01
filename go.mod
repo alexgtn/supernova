@@ -5,11 +5,13 @@ go 1.18
 require (
 	ariga.io/atlas v0.3.8-0.20220429204248-cb1a431ea095
 	entgo.io/ent v0.10.2-0.20220428114225-0c8f9a977c99
+	github.com/grpc-ecosystem/go-grpc-middleware v1.3.1-0.20220418151945-68c8cdc5fd81
 	github.com/jackc/pgx/v4 v4.16.0
 	github.com/lib/pq v1.10.5
 	github.com/pkg/errors v0.9.1
 	github.com/spf13/cobra v1.4.0
 	github.com/spf13/viper v1.11.0
+	go.uber.org/zap v1.21.0
 	google.golang.org/grpc v1.46.0
 	google.golang.org/grpc/examples v0.0.0-20220429201323-dc86d5de854f
 	google.golang.org/protobuf v1.28.0
@@ -23,7 +25,6 @@ require (
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/google/go-cmp v0.5.7 // indirect
 	github.com/google/uuid v1.3.0 // indirect
-	github.com/grpc-ecosystem/go-grpc-middleware v1.3.1-0.20220418151945-68c8cdc5fd81 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/hashicorp/hcl/v2 v2.10.0 // indirect
 	github.com/inconshreveable/mousetrap v1.0.0 // indirect
@@ -47,7 +48,6 @@ require (
 	github.com/zclconf/go-cty v1.8.0 // indirect
 	go.uber.org/atomic v1.9.0 // indirect
 	go.uber.org/multierr v1.8.0 // indirect
-	go.uber.org/zap v1.21.0 // indirect
 	golang.org/x/crypto v0.0.0-20220411220226-7b82a4e95df4 // indirect
 	golang.org/x/mod v0.5.1 // indirect
 	golang.org/x/net v0.0.0-20220412020605-290c469a71a5 // indirect

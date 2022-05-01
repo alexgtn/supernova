@@ -1,5 +1,13 @@
 ![](https://s1.gifyu.com/images/nLJguQ9---Imgur.gif)
 
+
+Run initial setup commands
+
+```
+mkdir postgres-data
+chmod u+x task atlas-linux-amd64
+```
+
 ## Start service
 
 `./task main`
