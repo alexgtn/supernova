@@ -2,9 +2,11 @@ package repository
 
 import (
 	"context"
+
+	"github.com/pkg/errors"
+
 	"github.com/alexgtn/supernova/domain/user"
 	"github.com/alexgtn/supernova/ent"
-	"github.com/pkg/errors"
 )
 
 type userRepo struct {

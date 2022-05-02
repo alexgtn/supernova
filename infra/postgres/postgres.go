@@ -2,8 +2,9 @@ package postgres
 
 import (
 	"database/sql"
-	"github.com/alexgtn/supernova/ent"
 	"log"
+
+	"github.com/alexgtn/supernova/ent"
 
 	"entgo.io/ent/dialect"
 	entsql "entgo.io/ent/dialect/sql"
@@ -18,6 +19,7 @@ func OpenEnt(databaseUrl string) *ent.Client {
 
 	// Create an ent.Driver from `db`.
 	drv := entsql.OpenDB(dialect.Postgres, db)
+
 	return ent.NewClient(ent.Driver(drv))
 }
 

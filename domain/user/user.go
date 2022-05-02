@@ -12,7 +12,7 @@ type User struct {
 	createdAt time.Time
 }
 
-func NewUser(id int, age int, name string, createdAt time.Time) (*User, error) {
+func NewUser(id, age int, name string, createdAt time.Time) (*User, error) {
 	if age <= 0 {
 		return nil, errors.New("age should be a positive number")
 	}

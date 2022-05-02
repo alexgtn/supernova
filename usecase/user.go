@@ -2,12 +2,14 @@ package usecase
 
 import (
 	"context"
-	"github.com/alexgtn/supernova/domain/user"
-	pb "github.com/alexgtn/supernova/proto"
+
 	"github.com/pkg/errors"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 	"google.golang.org/protobuf/types/known/timestamppb"
+
+	"github.com/alexgtn/supernova/domain/user"
+	pb "github.com/alexgtn/supernova/proto"
 )
 
 type userRepo interface {

@@ -6,11 +6,14 @@ package cmd
 
 import (
 	"context"
-	"entgo.io/ent/dialect/sql/schema"
 	"fmt"
+	"log"
+
+	"entgo.io/ent/dialect/sql/schema"
+
+	"github.com/alexgtn/supernova/ent"
 	"github.com/alexgtn/supernova/ent/migrate"
 	"github.com/alexgtn/supernova/infra/postgres"
-	"log"
 
 	"github.com/spf13/cobra"
 )
@@ -29,7 +32,12 @@ to quickly create a Cobra application.`,
 		fmt.Println("executeMigration called")
 		client := postgres.OpenEnt("postgresql://default:default@localhost:5432/postgres?sslmode=disable")
 
-		defer client.Close()
+		defer func(client *ent.Client) {
+			err := client.Close()
+			if err != nil {
+				log.Fatal("error closing client")
+			}
+		}(client)
 		ctx := context.Background()
 		// Run migration.
 		err := client.Schema.Create(ctx,

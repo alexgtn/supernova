@@ -8,6 +8,9 @@ import (
 	"context"
 	"flag"
 	"fmt"
+	"log"
+	"net"
+
 	"github.com/alexgtn/supernova/infra/postgres"
 	"github.com/alexgtn/supernova/infra/repository"
 	pb "github.com/alexgtn/supernova/proto"
@@ -17,16 +20,12 @@ import (
 	"github.com/spf13/cobra"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
-	"log"
-	"net"
 
 	_ "github.com/jackc/pgx/v4/stdlib"
 	"google.golang.org/grpc"
 )
 
-var (
-	port = flag.Int("port", 50051, "The server port")
-)
+var port = flag.Int("port", 50051, "The server port")
 
 // mainCmd represents the main command
 var mainCmd = &cobra.Command{
@@ -79,7 +78,6 @@ to quickly create a Cobra application.`,
 		if err := s.Serve(lis); err != nil {
 			log.Fatalf("failed to serve: %v", err)
 		}
-
 	},
 }
 

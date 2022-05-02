@@ -5,15 +5,18 @@ Copyright © 2022 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
+	"context"
+	"fmt"
+	"log"
+
 	"ariga.io/atlas/sql/migrate"
 	"ariga.io/atlas/sql/sqltool"
-	"context"
+
 	"entgo.io/ent/dialect/sql/schema"
 	"entgo.io/ent/entc"
 	"entgo.io/ent/entc/gen"
-	"fmt"
+
 	"github.com/alexgtn/supernova/infra/postgres"
-	"log"
 
 	"github.com/spf13/cobra"
 )

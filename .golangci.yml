@@ -1,0 +1,48 @@
+# Refer to golangci-lint's example config file for more options and information:
+# https://github.com/golangci/golangci-lint/blob/master/.golangci.example.yml
+
+run:
+  timeout: 5m
+  modules-download-mode: readonly
+  go: '1.18'
+  skip-dirs:
+    - ent
+
+linters:
+  enable:
+    - wsl
+    - typecheck
+    - unused
+    - structcheck
+    - varcheck
+    - staticcheck
+    - ineffassign
+    - govet
+    - gosimple
+    - errcheck
+    - deadcode
+    - goimports
+    - revive
+    - govet
+    - staticcheck
+#    - exhaustruct #  Checks if all structure fields are initialized
+    - gofmt # Gofmt checks whether code was gofmt-ed. By default this tool runs with -s option to check for code simplification
+    - gofumpt
+    - ifshort # Checks that your code uses short syntax for if-statements whenever possible
+    - ireturn # Accept Interfaces, Return Concrete Types
+    - makezero # Finds slice declarations with non-zero initial length
+    - unparam # Reports unused function parameters
+    - wrapcheck # Checks that errors returned from external packages are wrapped
+    - exhaustive # Check exhaustiveness of enum switch statements
+    - depguard # Go linter that checks if package imports are in a list of acceptable packages
+
+issues:
+  exclude-use-default: false
+  max-issues-per-linter: 0
+  max-same-issues: 0
+
+linters-settings:
+  revive:
+    rules:
+      - name: exported
+        disabled: true
