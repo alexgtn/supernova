@@ -1,0 +1,52 @@
+stages:
+  - test
+  - publish
+
+test-api:
+  stage: test
+  image: go:1.18.1
+  services:
+    - postgres
+  variables:
+    POSTGRES_DB: postgres
+    POSTGRES_USER: default
+    POSTGRES_PASSWORD: default
+    POSTGRES_HOST: postgres
+    POSTGRES_HOST_AUTH_METHOD: trust
+    POSTGRES_PORT: "5432"
+    POSTGRES_DATABASE: postgres
+  cache:
+    - key:
+        files: ["go.sum"]
+      paths: ["/go"]
+  script:
+    # install golangci
+    # In alpine linux (as it does not come with curl by default)
+    - wget -O- -nv https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s v1.45.2
+    - golangci-lint run
+    # install task runner
+    - sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d
+    # install atlas migrations
+    - curl -LO https://release.ariga.io/atlas/atlas-linux-amd64-latest
+    - mv atlas-linux-amd64-latest atlas-linux-amd64; chmod u+x atlas-linux-amd64
+    # run tests
+    - task execute-migration
+
+publish:
+  stage: publish
+  image: docker:20.10.14-dind
+  timeout: 40m
+  services: ["docker:20.10.14-dind"]
+  before_script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    - docker pull $CI_REGISTRY_IMAGE/backend:latest || true
+  script:
+    - docker build
+      --build-arg API_ADDRESS=$API_ADDRESS
+      --build-arg WEB_ADDRESS=$WEB_ADDRESS
+      --cache-from $CI_REGISTRY_IMAGE/backend:latest
+      --tag $CI_REGISTRY_IMAGE/backend:$CI_ENVIRONMENT_SLUG
+      --tag $CI_REGISTRY_IMAGE/backend:latest
+      --file Dockerfile
+      .
+    - docker push --all-tags $CI_REGISTRY_IMAGE/backend
