@@ -32,7 +32,7 @@ Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("migrate called")
+		fmt.Println("generating new migration")
 		// Load the graph.
 		graph, err := entc.LoadGraph("./ent/schema", &gen.Config{})
 		if err != nil {
@@ -47,7 +47,7 @@ to quickly create a Cobra application.`,
 		if err != nil {
 			log.Fatalln(err)
 		}
-		client := postgres.Open("postgresql://default:default@localhost:5432/postgres?sslmode=disable")
+		client := postgres.Open(cfg.DatabaseURL)
 
 		// Inspect it and compare it with the graph.
 		m, err := schema.NewMigrate(client, schema.WithDir(d),

@@ -11,15 +11,16 @@ import (
 	"log"
 	"net"
 
-	"github.com/alexgtn/supernova/infra/postgres"
-	"github.com/alexgtn/supernova/infra/repository"
-	pb "github.com/alexgtn/supernova/proto"
-	"github.com/alexgtn/supernova/usecase"
 	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"
 	grpc_zap "github.com/grpc-ecosystem/go-grpc-middleware/logging/zap"
 	"github.com/spf13/cobra"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
+
+	"github.com/alexgtn/supernova/infra/postgres"
+	"github.com/alexgtn/supernova/infra/repository"
+	pb "github.com/alexgtn/supernova/proto"
+	"github.com/alexgtn/supernova/usecase"
 
 	_ "github.com/jackc/pgx/v4/stdlib"
 	"google.golang.org/grpc"
@@ -40,7 +41,7 @@ to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("main called")
 
-		client := postgres.OpenEnt("postgresql://default:default@postgres:5432/postgres?sslmode=disable")
+		client := postgres.OpenEnt(cfg.DatabaseURL)
 		flag.Parse()
 
 		lis, err := net.Listen("tcp", fmt.Sprintf(":%d", *port))
