@@ -5,6 +5,7 @@ go 1.18
 require (
 	ariga.io/atlas v0.3.8-0.20220429204248-cb1a431ea095
 	entgo.io/ent v0.10.2-0.20220428114225-0c8f9a977c99
+	github.com/envoyproxy/protoc-gen-validate v0.6.7
 	github.com/grpc-ecosystem/go-grpc-middleware v1.3.1-0.20220418151945-68c8cdc5fd81
 	github.com/jackc/pgx/v4 v4.16.0
 	github.com/lib/pq v1.10.5
@@ -48,11 +49,11 @@ require (
 	go.uber.org/atomic v1.9.0 // indirect
 	go.uber.org/multierr v1.8.0 // indirect
 	golang.org/x/crypto v0.0.0-20220411220226-7b82a4e95df4 // indirect
-	golang.org/x/mod v0.5.1 // indirect
-	golang.org/x/net v0.0.0-20220412020605-290c469a71a5 // indirect
-	golang.org/x/sys v0.0.0-20220412211240-33da011f77ad // indirect
+	golang.org/x/mod v0.6.0-dev.0.20220106191415-9b9b3d81d5e3 // indirect
+	golang.org/x/net v0.0.0-20220425223048-2871e0cb64e4 // indirect
+	golang.org/x/sys v0.0.0-20220502124256-b6088ccd6cba // indirect
 	golang.org/x/text v0.3.7 // indirect
-	golang.org/x/tools v0.1.9-0.20211216111533-8d383106f7e7 // indirect
+	golang.org/x/tools v0.1.10 // indirect
 	golang.org/x/xerrors v0.0.0-20220411194840-2f41105eb62f // indirect
 	google.golang.org/genproto v0.0.0-20220407144326-9054f6ed7bac // indirect
 	gopkg.in/ini.v1 v1.66.4 // indirect

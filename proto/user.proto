@@ -5,6 +5,7 @@ option go_package = ".;user";
 package user;
 
 import "google/protobuf/timestamp.proto";
+import "validate/validate.proto";
 
 service UserService {
   rpc GetOne (OneUserRequest) returns (OneUserReply) {}
@@ -23,6 +24,6 @@ message OneUserReply {
 }
 
 message CreateUserRequest {
-  uint32 age = 2;
-  string name = 3;
+  uint32 age = 1 [(validate.rules).uint32 = {gte:0, lt: 200}];
+  string name = 2 [(validate.rules).string = {min_len: 1}];
 }

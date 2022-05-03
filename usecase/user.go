@@ -29,6 +29,11 @@ func NewUserService(r userRepo) *server {
 }
 
 func (s *server) Create(ctx context.Context, in *pb.CreateUserRequest) (*pb.OneUserReply, error) {
+	err := in.ValidateAll()
+	if err != nil {
+		return nil, status.Errorf(codes.InvalidArgument, errors.Wrapf(err, "invalid user data %s", in.String()).Error())
+	}
+
 	u, err := s.userRepo.Create(ctx, int(in.Age), in.Name)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, errors.Wrapf(err, "error creating user with data %s", in.String()).Error())

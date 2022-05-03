@@ -14,8 +14,11 @@ chmod u+x task atlas-linux-amd64
 
 ## Protobuf
 
-Requirements: protoc-gen-go, protoc-gen-go-grpc
+GRPC Requirements: 
+- `protoc-gen-go` `protoc-gen-go-grpc` https://grpc.io/docs/languages/go/quickstart/
+- `protoc-gen-validate` https://github.com/envoyproxy/protoc-gen-validate
 
+Generate structs 
 ```
 ./task pb
 ```
