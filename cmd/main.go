@@ -18,7 +18,7 @@ import (
 	"go.uber.org/zap/zapcore"
 
 	"github.com/alexgtn/supernova/infra/postgres"
-	"github.com/alexgtn/supernova/infra/repository"
+	"github.com/alexgtn/supernova/infra/repository/user"
 	pb "github.com/alexgtn/supernova/proto"
 	"github.com/alexgtn/supernova/usecase"
 
@@ -70,7 +70,7 @@ to quickly create a Cobra application.`,
 		))
 
 		// dependency injection
-		userRepo := repository.NewUser(client)
+		userRepo := user.NewUser(client)
 		userUsecase := usecase.NewUserService(userRepo)
 		pb.RegisterUserServiceServer(s, userUsecase)
 
