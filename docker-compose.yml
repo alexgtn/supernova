@@ -13,6 +13,8 @@ services:
       - "50051:50051"
       # The Web UI (enabled by --api.insecure=true)
       - "8080:8080"
+      # Caasdoor
+      - "8081:8081"
     volumes:
       # So that Traefik can listen to the Docker events
       - /var/run/docker.sock:/var/run/docker.sock
@@ -87,3 +89,14 @@ services:
 #      REPO_PASS: ${DOCKER_REGISTRY_PASSWORD}
 #    volumes:
 #      - /var/run/docker.sock:/var/run/docker.sock
+
+#  caasdoor:
+#    image: casbin/casdoor:v1.47.0
+#    restart: always
+#    volumes:
+#      - ./caasdoor.conf:/conf/caasdoor.conf
+#    labels:
+#      - "traefik.http.routers.main.rule=Host(`localhost`)"
+#      - "traefik.http.routers.main.entrypoints=caasdoor"
+#      - "traefik.http.services.main.loadbalancer.server.scheme=http"
+#      - "traefik.http.services.main.loadbalancer.server.port=8001"
