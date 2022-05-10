@@ -25,6 +25,7 @@ func (r *userRepo) GetByID(ctx context.Context, id int) (*user.User, error) {
 		if ok {
 			return nil, nil
 		}
+
 		return nil, errors.Wrapf(err, "error fetching user %d", id)
 	}
 
@@ -47,6 +48,7 @@ func (r *userRepo) Create(ctx context.Context, age int, name string) (*user.User
 		if ok {
 			return nil, nil
 		}
+
 		return nil, errors.Wrap(err, "error creating user")
 	}
 
@@ -87,6 +89,7 @@ func (r *userRepo) Update(ctx context.Context, id int, opts ...Option) (*user.Us
 		if ok {
 			return nil, nil
 		}
+
 		return nil, errors.Wrap(err, "error creating user")
 	}
 

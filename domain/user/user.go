@@ -16,9 +16,11 @@ func NewUser(id, age int, name string, createdAt time.Time) (*User, error) {
 	if age <= 0 {
 		return nil, errors.New("age should be a positive number")
 	}
+
 	if name == "" {
 		return nil, errors.New("name is empty")
 	}
+
 	if createdAt.IsZero() {
 		return nil, errors.New("createdAt invalid")
 	}

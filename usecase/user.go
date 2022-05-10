@@ -20,20 +20,19 @@ type userRepo interface {
 	Update(ctx context.Context, id int, opts ...user_repo.Option) (*user.User, error)
 }
 
-type server struct {
+type service struct {
 	pb.UnimplementedUserServiceServer
 	userRepo userRepo
 }
 
-func NewUserService(r userRepo) *server {
-	return &server{
+func NewUserService(r userRepo) *service {
+	return &service{
 		userRepo: r,
 	}
 }
 
-func (s *server) Create(ctx context.Context, in *pb.CreateUserRequest) (*pb.OneUserReply, error) {
-	err := in.ValidateAll()
-	if err != nil {
+func (s *service) Create(ctx context.Context, in *pb.CreateUserRequest) (*pb.OneUserReply, error) {
+	if err := in.ValidateAll(); err != nil {
 		return nil, status.Errorf(codes.InvalidArgument, errors.Wrapf(err, "invalid user data %s", in.String()).Error())
 	}
 
@@ -50,7 +49,7 @@ func (s *server) Create(ctx context.Context, in *pb.CreateUserRequest) (*pb.OneU
 	}, nil
 }
 
-func (s *server) GetOne(ctx context.Context, in *pb.OneUserRequest) (*pb.OneUserReply, error) {
+func (s *service) GetOne(ctx context.Context, in *pb.OneUserRequest) (*pb.OneUserReply, error) {
 	u, err := s.userRepo.GetByID(ctx, int(in.GetId()))
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, errors.Wrapf(err, "error getting the user with id %d", in.GetId()).Error())
@@ -64,18 +63,18 @@ func (s *server) GetOne(ctx context.Context, in *pb.OneUserRequest) (*pb.OneUser
 	}, nil
 }
 
-func (s *server) Update(ctx context.Context, in *pb.UpdateUserRequest) (*pb.OneUserReply, error) {
+func (s *service) Update(ctx context.Context, in *pb.UpdateUserRequest) (*pb.OneUserReply, error) {
 	// start transaction
 	txContext := db.NewTxContext(ctx)
 	// override context
 	ctx = txContext.GetContext()
 
-	u, err := s.userRepo.Update(ctx, int(in.GetId()), user_repo.WithName(in.GetName()))
+	_, err := s.userRepo.Update(ctx, int(in.GetId()), user_repo.WithName(in.GetName()))
 	if err != nil {
 		return nil, txContext.ErrRollback(status.Errorf(codes.Internal, errors.Wrapf(err, "error updating the user with id %d", in.GetId()).Error()))
 	}
 
-	u, err = s.userRepo.Update(ctx, int(in.GetId()), user_repo.WithAge(int(in.GetAge())))
+	u, err := s.userRepo.Update(ctx, int(in.GetId()), user_repo.WithAge(int(in.GetAge())))
 	if err != nil {
 		return nil, txContext.ErrRollback(status.Errorf(codes.Internal, errors.Wrapf(err, "error updating the user with id %d", in.GetId()).Error()))
 	}
