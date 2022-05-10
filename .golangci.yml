@@ -25,7 +25,7 @@ linters:
     - revive
     - govet
     - staticcheck
-#    - exhaustruct #  Checks if all structure fields are initialized
+    - exhaustruct #  Checks if all structure fields are initialized
     - gofmt # Gofmt checks whether code was gofmt-ed. By default this tool runs with -s option to check for code simplification
     - gofumpt
     - ifshort # Checks that your code uses short syntax for if-statements whenever possible
