@@ -21,7 +21,7 @@ gRPC gateway
 GRPC Requirements: 
 - `protoc-gen-go` `protoc-gen-go-grpc` https://grpc.io/docs/languages/go/quickstart/
 - `protoc-gen-validate` https://github.com/envoyproxy/protoc-gen-validate
-- grpc gateway
+- grpc gateway https://github.com/grpc-ecosystem/grpc-gateway
 
 ```
 go install \
