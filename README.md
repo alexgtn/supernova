@@ -17,6 +17,16 @@ chmod u+x task atlas-linux-amd64
 GRPC Requirements: 
 - `protoc-gen-go` `protoc-gen-go-grpc` https://grpc.io/docs/languages/go/quickstart/
 - `protoc-gen-validate` https://github.com/envoyproxy/protoc-gen-validate
+- grpc gateway
+
+```
+go install \
+    github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-grpc-gateway@latest \
+    github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2@latest \
+    google.golang.org/protobuf/cmd/protoc-gen-go@latest \
+    google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest \
+    github.com/envoyproxy/protoc-gen-validate@latest
+```
 
 Generate structs 
 ```
