@@ -12,6 +12,10 @@ chmod u+x task atlas-linux-amd64
 
 `./task main`
 
+gRPC gateway
+
+`./task http`
+
 ## Protobuf
 
 GRPC Requirements: 

@@ -22,7 +22,7 @@ func FromLocalFile(path string, filename string) *Config {
 
 	var conf *Config
 
-	err = viper.Unmarshal(conf)
+	err = viper.Unmarshal(&conf)
 
 	if err != nil {
 		log.Fatalf("unable to decode into Config struct, %v", err)
