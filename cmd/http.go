@@ -43,6 +43,14 @@ var httpCmd = &cobra.Command{
 			log.Fatalf("failed to register gRPC gateway: %v", err)
 		}
 
+		// serve documentation
+		err = mux.HandlePath("GET", "/api/docs", func(w http.ResponseWriter, r *http.Request, pathParams map[string]string) {
+			http.ServeFile(w, r, "docs/index.html")
+		})
+		if err != nil {
+			log.Fatalf("failed to register docs handler: %v", err)
+		}
+
 		// Start HTTP server (and proxy calls to gRPC server endpoint)
 		err = http.ListenAndServe(fmt.Sprintf(":%d", *httpPort), mux)
 		if err != nil {
