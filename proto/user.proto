@@ -5,12 +5,30 @@ option go_package = ".;user";
 package user;
 
 import "google/protobuf/timestamp.proto";
+import "google/api/annotations.proto";
 import "validate/validate.proto";
 
+// Option annotation docs
+// https://github.com/googleapis/googleapis/blob/master/google/api/http.proto
+
 service UserService {
-  rpc GetOne (OneUserRequest) returns (OneUserReply) {}
-  rpc Create (CreateUserRequest) returns (OneUserReply) {}
-  rpc Update (UpdateUserRequest) returns (OneUserReply) {}
+  rpc GetOne (OneUserRequest) returns (OneUserReply) {
+     option (google.api.http) = {
+        get: "/api/users/{id}"
+     };
+  }
+  rpc Create (CreateUserRequest) returns (OneUserReply) {
+    option (google.api.http) = {
+      post: "/api/users"
+      body: "*"
+    };
+  }
+  rpc Update (UpdateUserRequest) returns (OneUserReply) {
+    option (google.api.http) = {
+      put: "/api/users/{id}"
+      body: "*"
+    };
+  }
 }
 
 message OneUserRequest {
@@ -23,6 +41,9 @@ message OneUserReply {
   string name = 3;
   google.protobuf.Timestamp created_at = 4;
 }
+
+// Validation docs
+// https://github.com/envoyproxy/protoc-gen-validate
 
 message CreateUserRequest {
   uint32 age = 1 [(validate.rules).uint32 = {gte:0, lt: 200}];

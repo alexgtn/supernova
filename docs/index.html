@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>proto/user.proto</title>
+  <title>user.proto</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta charset="UTF-8" />
@@ -696,12 +696,11 @@ margin-bottom: 20px;
   <script>
     // Script section to load models into a JS Var
     var defs = {}
+        defs["body"] = {"type":"object","properties":{"age":{"type":"integer","format":"int64"},"name":{"type":"string"}}};
         defs["protobufAny"] = {"type":"object","properties":{"@type":{"type":"string"}},"additionalProperties":{}};
         defs["rpcStatus"] = {"type":"object","properties":{"code":{"type":"integer","format":"int32"},"message":{"type":"string"},"details":{"type":"array","items":{"$ref":"#/definitions/protobufAny"}}}};
         defs["userCreateUserRequest"] = {"type":"object","properties":{"age":{"type":"integer","format":"int64"},"name":{"type":"string"}}};
         defs["userOneUserReply"] = {"type":"object","properties":{"id":{"type":"integer","format":"int64"},"age":{"type":"integer","format":"int64"},"name":{"type":"string"},"createdAt":{"type":"string","format":"date-time"}}};
-        defs["userOneUserRequest"] = {"type":"object","properties":{"id":{"type":"integer","format":"int64"}}};
-        defs["userUpdateUserRequest"] = {"type":"object","properties":{"id":{"type":"integer","format":"int64"},"age":{"type":"integer","format":"int64"},"name":{"type":"string"}}};
   </script>
 
   <div class="container-fluid">
@@ -734,7 +733,7 @@ margin-bottom: 20px;
       <div id="content">
         <div id="project">
           <div class="pull-left">
-            <h1>proto/user.proto</h1>
+            <h1>user.proto</h1>
           </div>
           <div class="clearfix"></div>
         </div>
@@ -761,7 +760,7 @@ margin-bottom: 20px;
                         <p class="marked"></p>
                         <p></p>
                         <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/user.UserService/Create</span></code></pre>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/api/users</span></code></pre>
                         <p>
                           <h3>Usage and SDK Samples</h3>
                         </p>
@@ -781,7 +780,7 @@ margin-bottom: 20px;
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-UserService-userServiceCreate-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X POST "https://localhost/user.UserService/Create"</code></pre>
+                            <pre class="prettyprint"><code class="language-bsh">curl -X POST "https://localhost/api/users"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-UserService-userServiceCreate-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -849,9 +848,9 @@ UserServiceApi *apiInstance = [[UserServiceApi alloc] init];
                             </div>
 
                             <div class="tab-pane" id="examples-UserService-userServiceCreate-0-javascript">
-                              <pre class="prettyprint"><code class="language-js">var Protouserproto = require('protouserproto');
+                              <pre class="prettyprint"><code class="language-js">var Userproto = require('userproto');
 
-var api = new Protouserproto.UserServiceApi()
+var api = new Userproto.UserServiceApi()
 
 var body = ; // {UserCreateUserRequest} 
 
@@ -1104,7 +1103,7 @@ $(document).ready(function() {
                         <p class="marked"></p>
                         <p></p>
                         <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/user.UserService/GetOne</span></code></pre>
+                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/api/users/{id}</span></code></pre>
                         <p>
                           <h3>Usage and SDK Samples</h3>
                         </p>
@@ -1124,7 +1123,7 @@ $(document).ready(function() {
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-UserService-userServiceGetOne-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X POST "https://localhost/user.UserService/GetOne"</code></pre>
+                            <pre class="prettyprint"><code class="language-bsh">curl -X GET "https://localhost/api/users/{id}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-UserService-userServiceGetOne-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -1140,9 +1139,9 @@ public class UserServiceApiExample {
     public static void main(String[] args) {
         
         UserServiceApi apiInstance = new UserServiceApi();
-        UserOneUserRequest body = ; // UserOneUserRequest | 
+        Long id = 789; // Long | 
         try {
-            userOneUserReply result = apiInstance.userServiceGetOne(body);
+            userOneUserReply result = apiInstance.userServiceGetOne(id);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling UserServiceApi#userServiceGetOne");
@@ -1159,9 +1158,9 @@ public class UserServiceApiExample {
 
     public static void main(String[] args) {
         UserServiceApi apiInstance = new UserServiceApi();
-        UserOneUserRequest body = ; // UserOneUserRequest | 
+        Long id = 789; // Long | 
         try {
-            userOneUserReply result = apiInstance.userServiceGetOne(body);
+            userOneUserReply result = apiInstance.userServiceGetOne(id);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling UserServiceApi#userServiceGetOne");
@@ -1175,11 +1174,11 @@ public class UserServiceApiExample {
   <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
   </div> -->
                             <div class="tab-pane" id="examples-UserService-userServiceGetOne-0-objc">
-                              <pre class="prettyprint"><code class="language-cpp">UserOneUserRequest *body = ; // 
+                              <pre class="prettyprint"><code class="language-cpp">Long *id = 789; // 
 
 UserServiceApi *apiInstance = [[UserServiceApi alloc] init];
 
-[apiInstance userServiceGetOneWith:body
+[apiInstance userServiceGetOneWith:id
               completionHandler: ^(userOneUserReply output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
@@ -1192,11 +1191,11 @@ UserServiceApi *apiInstance = [[UserServiceApi alloc] init];
                             </div>
 
                             <div class="tab-pane" id="examples-UserService-userServiceGetOne-0-javascript">
-                              <pre class="prettyprint"><code class="language-js">var Protouserproto = require('protouserproto');
+                              <pre class="prettyprint"><code class="language-js">var Userproto = require('userproto');
 
-var api = new Protouserproto.UserServiceApi()
+var api = new Userproto.UserServiceApi()
 
-var body = ; // {UserOneUserRequest} 
+var id = 789; // {Long} 
 
 
 var callback = function(error, data, response) {
@@ -1206,7 +1205,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-api.userServiceGetOne(body, callback);
+api.userServiceGetOne(id, callback);
 </code></pre>
                             </div>
 
@@ -1228,11 +1227,11 @@ namespace Example
         {
             
             var apiInstance = new UserServiceApi();
-            var body = new UserOneUserRequest(); // UserOneUserRequest | 
+            var id = 789;  // Long | 
 
             try
             {
-                userOneUserReply result = apiInstance.userServiceGetOne(body);
+                userOneUserReply result = apiInstance.userServiceGetOne(id);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -1250,10 +1249,10 @@ namespace Example
 require_once(__DIR__ . '/vendor/autoload.php');
 
 $api_instance = new Swagger\Client\Api\UserServiceApi();
-$body = ; // UserOneUserRequest | 
+$id = 789; // Long | 
 
 try {
-    $result = $api_instance->userServiceGetOne($body);
+    $result = $api_instance->userServiceGetOne($id);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling UserServiceApi->userServiceGetOne: ', $e->getMessage(), PHP_EOL;
@@ -1267,10 +1266,10 @@ use WWW::SwaggerClient::Configuration;
 use WWW::SwaggerClient::UserServiceApi;
 
 my $api_instance = WWW::SwaggerClient::UserServiceApi->new();
-my $body = WWW::SwaggerClient::Object::UserOneUserRequest->new(); # UserOneUserRequest | 
+my $id = 789; # Long | 
 
 eval { 
-    my $result = $api_instance->userServiceGetOne(body => $body);
+    my $result = $api_instance->userServiceGetOne(id => $id);
     print Dumper($result);
 };
 if ($@) {
@@ -1287,10 +1286,10 @@ from pprint import pprint
 
 # create an instance of the API class
 api_instance = swagger_client.UserServiceApi()
-body =  # UserOneUserRequest | 
+id = 789 # Long | 
 
 try: 
-    api_response = api_instance.user_service_get_one(body)
+    api_response = api_instance.user_service_get_one(id)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling UserServiceApi->userServiceGetOne: %s\n" % e)</code></pre>
@@ -1299,49 +1298,38 @@ except ApiException as e:
 
                           <h2>Parameters</h2>
 
-
-
-                            <div class="methodsubtabletitle">Body parameters</div>
+                            <div class="methodsubtabletitle">Path parameters</div>
                             <table id="methodsubtable">
-                              <tr>
-                                <th width="150px">Name</th>
-                                <th>Description</th>
-                              </tr>
-                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <tr>
+                                  <th width="150px">Name</th>
+                                  <th>Description</th>
+                                </tr>
+                                  <tr><td style="width:150px;">id*</td>
 <td>
 
 
-<script>
-$(document).ready(function() {
-  var schemaWrapper = {
-  "in" : "body",
-  "name" : "body",
-  "required" : true,
-  "schema" : {
-    "$ref" : "#/definitions/userOneUserRequest"
-  }
-};
-  var schema = schemaWrapper.schema;
-  if (schema.$ref != null) {
-    schema = defsParser.$refs.get(schema.$ref);
-  } else {
-    schemaWrapper.definitions = Object.assign({}, defs);
-    $RefParser.dereference(schemaWrapper).catch(function(err) {
-      console.log(err);
-    });
-  }
+    <div id="d2e199_userServiceGetOne_id">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    Long
+                </span>
+                    <span class="format">
+                        (int64)
+                    </span>
 
-  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
-  var result = $('#d2e199_userServiceGetOne_body');
-  result.empty();
-  result.append(view.render());
-});
-</script>
-<div id="d2e199_userServiceGetOne_body"></div>
+            </div>
+                <div class="inner required">
+                    Required
+                </div>
+        </div>
+    </div>
 </td>
 </tr>
 
                             </table>
+
+
 
 
 
@@ -1447,7 +1435,7 @@ $(document).ready(function() {
                         <p class="marked"></p>
                         <p></p>
                         <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/user.UserService/Update</span></code></pre>
+                        <pre class="prettyprint language-html prettyprinted" data-type="put"><code><span class="pln">/api/users/{id}</span></code></pre>
                         <p>
                           <h3>Usage and SDK Samples</h3>
                         </p>
@@ -1467,7 +1455,7 @@ $(document).ready(function() {
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-UserService-userServiceUpdate-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X POST "https://localhost/user.UserService/Update"</code></pre>
+                            <pre class="prettyprint"><code class="language-bsh">curl -X PUT "https://localhost/api/users/{id}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-UserService-userServiceUpdate-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -1483,9 +1471,10 @@ public class UserServiceApiExample {
     public static void main(String[] args) {
         
         UserServiceApi apiInstance = new UserServiceApi();
-        UserUpdateUserRequest body = ; // UserUpdateUserRequest | 
+        Long id = 789; // Long | 
+        Body body = ; // Body | 
         try {
-            userOneUserReply result = apiInstance.userServiceUpdate(body);
+            userOneUserReply result = apiInstance.userServiceUpdate(id, body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling UserServiceApi#userServiceUpdate");
@@ -1502,9 +1491,10 @@ public class UserServiceApiExample {
 
     public static void main(String[] args) {
         UserServiceApi apiInstance = new UserServiceApi();
-        UserUpdateUserRequest body = ; // UserUpdateUserRequest | 
+        Long id = 789; // Long | 
+        Body body = ; // Body | 
         try {
-            userOneUserReply result = apiInstance.userServiceUpdate(body);
+            userOneUserReply result = apiInstance.userServiceUpdate(id, body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling UserServiceApi#userServiceUpdate");
@@ -1518,11 +1508,13 @@ public class UserServiceApiExample {
   <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
   </div> -->
                             <div class="tab-pane" id="examples-UserService-userServiceUpdate-0-objc">
-                              <pre class="prettyprint"><code class="language-cpp">UserUpdateUserRequest *body = ; // 
+                              <pre class="prettyprint"><code class="language-cpp">Long *id = 789; // 
+Body *body = ; // 
 
 UserServiceApi *apiInstance = [[UserServiceApi alloc] init];
 
-[apiInstance userServiceUpdateWith:body
+[apiInstance userServiceUpdateWith:id
+    body:body
               completionHandler: ^(userOneUserReply output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
@@ -1535,11 +1527,13 @@ UserServiceApi *apiInstance = [[UserServiceApi alloc] init];
                             </div>
 
                             <div class="tab-pane" id="examples-UserService-userServiceUpdate-0-javascript">
-                              <pre class="prettyprint"><code class="language-js">var Protouserproto = require('protouserproto');
+                              <pre class="prettyprint"><code class="language-js">var Userproto = require('userproto');
 
-var api = new Protouserproto.UserServiceApi()
+var api = new Userproto.UserServiceApi()
 
-var body = ; // {UserUpdateUserRequest} 
+var id = 789; // {Long} 
+
+var body = ; // {Body} 
 
 
 var callback = function(error, data, response) {
@@ -1549,7 +1543,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-api.userServiceUpdate(body, callback);
+api.userServiceUpdate(id, body, callback);
 </code></pre>
                             </div>
 
@@ -1571,11 +1565,12 @@ namespace Example
         {
             
             var apiInstance = new UserServiceApi();
-            var body = new UserUpdateUserRequest(); // UserUpdateUserRequest | 
+            var id = 789;  // Long | 
+            var body = new Body(); // Body | 
 
             try
             {
-                userOneUserReply result = apiInstance.userServiceUpdate(body);
+                userOneUserReply result = apiInstance.userServiceUpdate(id, body);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -1593,10 +1588,11 @@ namespace Example
 require_once(__DIR__ . '/vendor/autoload.php');
 
 $api_instance = new Swagger\Client\Api\UserServiceApi();
-$body = ; // UserUpdateUserRequest | 
+$id = 789; // Long | 
+$body = ; // Body | 
 
 try {
-    $result = $api_instance->userServiceUpdate($body);
+    $result = $api_instance->userServiceUpdate($id, $body);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling UserServiceApi->userServiceUpdate: ', $e->getMessage(), PHP_EOL;
@@ -1610,10 +1606,11 @@ use WWW::SwaggerClient::Configuration;
 use WWW::SwaggerClient::UserServiceApi;
 
 my $api_instance = WWW::SwaggerClient::UserServiceApi->new();
-my $body = WWW::SwaggerClient::Object::UserUpdateUserRequest->new(); # UserUpdateUserRequest | 
+my $id = 789; # Long | 
+my $body = WWW::SwaggerClient::Object::Body->new(); # Body | 
 
 eval { 
-    my $result = $api_instance->userServiceUpdate(body => $body);
+    my $result = $api_instance->userServiceUpdate(id => $id, body => $body);
     print Dumper($result);
 };
 if ($@) {
@@ -1630,10 +1627,11 @@ from pprint import pprint
 
 # create an instance of the API class
 api_instance = swagger_client.UserServiceApi()
-body =  # UserUpdateUserRequest | 
+id = 789 # Long | 
+body =  # Body | 
 
 try: 
-    api_response = api_instance.user_service_update(body)
+    api_response = api_instance.user_service_update(id, body)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling UserServiceApi->userServiceUpdate: %s\n" % e)</code></pre>
@@ -1642,6 +1640,36 @@ except ApiException as e:
 
                           <h2>Parameters</h2>
 
+                            <div class="methodsubtabletitle">Path parameters</div>
+                            <table id="methodsubtable">
+                                <tr>
+                                  <th width="150px">Name</th>
+                                  <th>Description</th>
+                                </tr>
+                                  <tr><td style="width:150px;">id*</td>
+<td>
+
+
+    <div id="d2e199_userServiceUpdate_id">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    Long
+                </span>
+                    <span class="format">
+                        (int64)
+                    </span>
+
+            </div>
+                <div class="inner required">
+                    Required
+                </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                            </table>
 
 
                             <div class="methodsubtabletitle">Body parameters</div>
@@ -1661,7 +1689,7 @@ $(document).ready(function() {
   "name" : "body",
   "required" : true,
   "schema" : {
-    "$ref" : "#/definitions/userUpdateUserRequest"
+    "$ref" : "#/definitions/body"
   }
 };
   var schema = schemaWrapper.schema;
