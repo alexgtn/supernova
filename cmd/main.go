@@ -17,6 +17,7 @@ import (
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 
+	"github.com/alexgtn/supernova/ent"
 	"github.com/alexgtn/supernova/infra/postgres"
 	"github.com/alexgtn/supernova/infra/repository/user"
 	pb "github.com/alexgtn/supernova/proto"
@@ -36,6 +37,12 @@ var mainCmd = &cobra.Command{
 		fmt.Println("main called")
 
 		client := postgres.OpenEnt(cfg.DatabaseURL)
+		defer func(client *ent.Client) {
+			err := client.Close()
+			if err != nil {
+				log.Fatal("error closing client")
+			}
+		}(client)
 		flag.Parse()
 
 		// logging
