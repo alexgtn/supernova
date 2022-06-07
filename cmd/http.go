@@ -18,7 +18,7 @@ import (
 	_ "github.com/jackc/pgx/v4/stdlib"
 	"google.golang.org/grpc"
 
-	"github.com/alexgtn/supernova/delivery/http/docs"
+	http2 "github.com/alexgtn/supernova/delivery/http"
 	pb "github.com/alexgtn/supernova/proto"
 )
 
@@ -45,7 +45,7 @@ var httpCmd = &cobra.Command{
 		}
 
 		// serve documentation
-		err = mux.HandlePath("GET", "/api/docs", Handle(docs.ServeDocs))
+		err = mux.HandlePath("GET", "/api/docs", Handle(http2.ServeDocs))
 		if err != nil {
 			log.Fatalf("failed to register docs handler: %v", err)
 		}

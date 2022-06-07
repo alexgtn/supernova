@@ -1,4 +1,4 @@
-package docs
+package http
 
 import "net/http"
 
