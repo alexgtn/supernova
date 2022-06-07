@@ -17,6 +17,7 @@ import (
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 
+	delivery "github.com/alexgtn/supernova/delivery/grpc"
 	"github.com/alexgtn/supernova/ent"
 	"github.com/alexgtn/supernova/infra/postgres"
 	"github.com/alexgtn/supernova/infra/repository/user"
@@ -68,7 +69,8 @@ var mainCmd = &cobra.Command{
 		// dependency injection
 		userRepo := user.NewUser(client)
 		userUsecase := usecase.NewUserService(userRepo)
-		pb.RegisterUserServiceServer(s, userUsecase)
+		userDelivery := delivery.NewUserDeliveryGrpc(userUsecase)
+		pb.RegisterUserServiceServer(s, userDelivery)
 
 		lis, err := net.Listen("tcp", fmt.Sprintf(":%d", *port))
 		if err != nil {
