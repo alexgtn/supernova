@@ -23,7 +23,7 @@ import (
 
 var httpPort = flag.Int("http-port", 8080, "The HTTP server port")
 
-// mainCmd represents the main command
+// httpCmd starts the gRPC gateway
 var httpCmd = &cobra.Command{
 	Use:   "http",
 	Short: "gRPC HTTP gateway",
