@@ -44,11 +44,6 @@ to quickly create a Cobra application.`,
 		client := postgres.OpenEnt(cfg.DatabaseURL)
 		flag.Parse()
 
-		lis, err := net.Listen("tcp", fmt.Sprintf(":%d", *port))
-		if err != nil {
-			log.Fatalf("failed to listen: %v", err)
-		}
-
 		// logging
 		zapconfig := zap.NewProductionConfig()
 		zapconfig.EncoderConfig.EncodeTime = zapcore.ISO8601TimeEncoder
@@ -73,6 +68,11 @@ to quickly create a Cobra application.`,
 		userRepo := user.NewUser(client)
 		userUsecase := usecase.NewUserService(userRepo)
 		pb.RegisterUserServiceServer(s, userUsecase)
+
+		lis, err := net.Listen("tcp", fmt.Sprintf(":%d", *port))
+		if err != nil {
+			log.Fatalf("failed to listen: %v", err)
+		}
 
 		log.Printf("server listening at %v", lis.Addr())
 
