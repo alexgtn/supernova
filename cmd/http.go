@@ -18,6 +18,7 @@ import (
 	_ "github.com/jackc/pgx/v4/stdlib"
 	"google.golang.org/grpc"
 
+	"github.com/alexgtn/supernova/delivery/http/docs"
 	pb "github.com/alexgtn/supernova/proto"
 )
 
@@ -44,9 +45,7 @@ var httpCmd = &cobra.Command{
 		}
 
 		// serve documentation
-		err = mux.HandlePath("GET", "/api/docs", func(w http.ResponseWriter, r *http.Request, pathParams map[string]string) {
-			http.ServeFile(w, r, "docs/index.html")
-		})
+		err = mux.HandlePath("GET", "/api/docs", Handle(docs.ServeDocs))
 		if err != nil {
 			log.Fatalf("failed to register docs handler: %v", err)
 		}
@@ -57,6 +56,13 @@ var httpCmd = &cobra.Command{
 			log.Fatalf("failed to start gRPC gateway: %v", err)
 		}
 	},
+}
+
+// Handle takes basic http handle and returns gateway handle
+func Handle(handlerFunc http.HandlerFunc) runtime.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request, pathParams map[string]string) {
+		handlerFunc(w, r)
+	}
 }
 
 func init() {
