@@ -24,11 +24,11 @@ func (r *userRepo) GetByID(ctx context.Context, id int) (*user.User, error) {
 	if err != nil {
 		switch err.(type) {
 		case *ent.NotFoundError:
-			return nil, errors2.WrapErrNotFound(err)
+			return nil, errors.Wrapf(errors2.ErrNotFound, "could not find user with id %d: %v", id, err)
 		case *ent.NotSingularError:
-			return nil, errors2.WrapErrNotSingular(err)
+			return nil, errors.Wrapf(errors2.ErrNotSingular, "more than one user with id %d: %v", id, err)
 		default:
-			return nil, errors.Wrapf(err, "could not get user by id %s", id)
+			return nil, errors.Wrapf(err, "could not get user by id %d", id)
 		}
 	}
 
