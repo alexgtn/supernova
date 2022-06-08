@@ -32,9 +32,14 @@ go install \
     github.com/envoyproxy/protoc-gen-validate@latest
 ```
 
-Generate structs 
+Generate ent db code 
 ```
-./task pb
+./task gen-schema
+```
+
+Generate protobuf and API docs
+```
+./task gen
 ```
 
 ## Migrations
@@ -53,8 +58,7 @@ Optional
 
 - [ ] Auth/AuthZ with Auth0 and grpc_auth middleware, or Auth https://casdoor.org/ AuthZ https://casbin.org/en/
 - [x] Viper config
-- [ ] gRPC request validation https://github.com/envoyproxy/protoc-gen-validate
+- [x] gRPC request validation https://github.com/envoyproxy/protoc-gen-validate
 - [x] linter
-- [ ] Add tests
-- [ ] db transactions
+- [x] db transactions
 - [x] Gitlab CI
