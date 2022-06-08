@@ -5,7 +5,7 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/alexgtn/supernova/ent"
+	ent "github.com/alexgtn/supernova/tools/ent/codegen"
 )
 
 type ContextKey string

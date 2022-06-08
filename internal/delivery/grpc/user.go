@@ -8,8 +8,8 @@ import (
 	"google.golang.org/grpc/status"
 	"google.golang.org/protobuf/types/known/timestamppb"
 
-	"github.com/alexgtn/supernova/domain/user"
-	pb "github.com/alexgtn/supernova/proto"
+	"github.com/alexgtn/supernova/internal/domain/user"
+	pb "github.com/alexgtn/supernova/tools/proto"
 )
 
 type userService interface {

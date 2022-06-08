@@ -17,9 +17,9 @@ import (
 	"entgo.io/ent/entc"
 	"entgo.io/ent/entc/gen"
 
-	"github.com/alexgtn/supernova/infra/postgres"
-
 	"github.com/spf13/cobra"
+
+	"github.com/alexgtn/supernova/internal/infra/postgres"
 )
 
 // migrateCmd represents the migrate command
@@ -38,7 +38,7 @@ var migrateCmd = &cobra.Command{
 			log.Fatalln(err)
 		}
 		// Create a local migration directory.
-		d, err := migrate.NewLocalDir("migrations")
+		d, err := migrate.NewLocalDir("tools/migrations")
 		if err != nil {
 			log.Fatalln(err)
 		}

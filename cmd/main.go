@@ -17,12 +17,12 @@ import (
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 
-	delivery "github.com/alexgtn/supernova/delivery/grpc"
-	"github.com/alexgtn/supernova/ent"
-	"github.com/alexgtn/supernova/infra/postgres"
-	"github.com/alexgtn/supernova/infra/repository/user"
-	pb "github.com/alexgtn/supernova/proto"
-	"github.com/alexgtn/supernova/usecase"
+	delivery "github.com/alexgtn/supernova/internal/delivery/grpc"
+	"github.com/alexgtn/supernova/internal/infra/postgres"
+	"github.com/alexgtn/supernova/internal/infra/repository/user"
+	"github.com/alexgtn/supernova/internal/usecase"
+	ent "github.com/alexgtn/supernova/tools/ent/codegen"
+	pb "github.com/alexgtn/supernova/tools/proto"
 
 	_ "github.com/jackc/pgx/v4/stdlib"
 	"google.golang.org/grpc"

@@ -5,10 +5,11 @@ import (
 
 	"github.com/pkg/errors"
 
-	tx "github.com/alexgtn/supernova/common/db"
-	errors2 "github.com/alexgtn/supernova/domain/errors"
-	"github.com/alexgtn/supernova/domain/user"
-	"github.com/alexgtn/supernova/ent"
+	ent "github.com/alexgtn/supernova/tools/ent/codegen"
+
+	errors2 "github.com/alexgtn/supernova/internal/domain/errors"
+	"github.com/alexgtn/supernova/internal/domain/user"
+	tx "github.com/alexgtn/supernova/pkg/db"
 )
 
 type userRepo struct {

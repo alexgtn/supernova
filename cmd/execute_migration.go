@@ -11,9 +11,10 @@ import (
 
 	"entgo.io/ent/dialect/sql/schema"
 
-	"github.com/alexgtn/supernova/ent"
-	"github.com/alexgtn/supernova/ent/migrate"
-	"github.com/alexgtn/supernova/infra/postgres"
+	"github.com/alexgtn/supernova/tools/ent/codegen/migrate"
+
+	"github.com/alexgtn/supernova/internal/infra/postgres"
+	ent "github.com/alexgtn/supernova/tools/ent/codegen"
 
 	"github.com/spf13/cobra"
 )

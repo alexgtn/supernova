@@ -7,10 +7,11 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
-	"github.com/alexgtn/supernova/common/db"
-	"github.com/alexgtn/supernova/domain/user"
-	user_repo "github.com/alexgtn/supernova/infra/repository/user"
-	pb "github.com/alexgtn/supernova/proto"
+	pb "github.com/alexgtn/supernova/tools/proto"
+
+	"github.com/alexgtn/supernova/internal/domain/user"
+	user_repo "github.com/alexgtn/supernova/internal/infra/repository/user"
+	"github.com/alexgtn/supernova/pkg/db"
 )
 
 type userRepo interface {
