@@ -10,7 +10,7 @@ import (
 
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/schema/field"
-	"github.com/alexgtn/supernova/ent/user"
+	"github.com/alexgtn/supernova/tools/ent/codegen/user"
 )
 
 // UserCreate is the builder for creating a User entity.
@@ -90,7 +90,7 @@ func (uc *UserCreate) Save(ctx context.Context) (*User, error) {
 		})
 		for i := len(uc.hooks) - 1; i >= 0; i-- {
 			if uc.hooks[i] == nil {
-				return nil, fmt.Errorf("ent: uninitialized hook (forgotten import ent/runtime?)")
+				return nil, fmt.Errorf("codegen: uninitialized hook (forgotten import codegen/runtime?)")
 			}
 			mut = uc.hooks[i](mut)
 		}
@@ -138,18 +138,18 @@ func (uc *UserCreate) defaults() {
 // check runs all checks and user-defined validators on the builder.
 func (uc *UserCreate) check() error {
 	if _, ok := uc.mutation.Age(); !ok {
-		return &ValidationError{Name: "age", err: errors.New(`ent: missing required field "User.age"`)}
+		return &ValidationError{Name: "age", err: errors.New(`codegen: missing required field "User.age"`)}
 	}
 	if v, ok := uc.mutation.Age(); ok {
 		if err := user.AgeValidator(v); err != nil {
-			return &ValidationError{Name: "age", err: fmt.Errorf(`ent: validator failed for field "User.age": %w`, err)}
+			return &ValidationError{Name: "age", err: fmt.Errorf(`codegen: validator failed for field "User.age": %w`, err)}
 		}
 	}
 	if _, ok := uc.mutation.Name(); !ok {
-		return &ValidationError{Name: "name", err: errors.New(`ent: missing required field "User.name"`)}
+		return &ValidationError{Name: "name", err: errors.New(`codegen: missing required field "User.name"`)}
 	}
 	if _, ok := uc.mutation.CreatedAt(); !ok {
-		return &ValidationError{Name: "created_at", err: errors.New(`ent: missing required field "User.created_at"`)}
+		return &ValidationError{Name: "created_at", err: errors.New(`codegen: missing required field "User.created_at"`)}
 	}
 	return nil
 }

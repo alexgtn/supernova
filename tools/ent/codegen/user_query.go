@@ -10,8 +10,8 @@ import (
 	"entgo.io/ent/dialect/sql"
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/schema/field"
-	"github.com/alexgtn/supernova/ent/predicate"
-	"github.com/alexgtn/supernova/ent/user"
+	"github.com/alexgtn/supernova/tools/ent/codegen/predicate"
+	"github.com/alexgtn/supernova/tools/ent/codegen/user"
 )
 
 // UserQuery is the builder for querying User entities.
@@ -259,7 +259,7 @@ func (uq *UserQuery) Clone() *UserQuery {
 //
 //	client.User.Query().
 //		GroupBy(user.FieldAge).
-//		Aggregate(ent.Count()).
+//		Aggregate(codegen.Count()).
 //		Scan(ctx, &v)
 //
 func (uq *UserQuery) GroupBy(field string, fields ...string) *UserGroupBy {
@@ -300,7 +300,7 @@ func (uq *UserQuery) Select(fields ...string) *UserSelect {
 func (uq *UserQuery) prepareQuery(ctx context.Context) error {
 	for _, f := range uq.fields {
 		if !user.ValidColumn(f) {
-			return &ValidationError{Name: f, err: fmt.Errorf("ent: invalid field %q for query", f)}
+			return &ValidationError{Name: f, err: fmt.Errorf("codegen: invalid field %q for query", f)}
 		}
 	}
 	if uq.path != nil {
@@ -350,7 +350,7 @@ func (uq *UserQuery) sqlCount(ctx context.Context) (int, error) {
 func (uq *UserQuery) sqlExist(ctx context.Context) (bool, error) {
 	n, err := uq.sqlCount(ctx)
 	if err != nil {
-		return false, fmt.Errorf("ent: check existence: %w", err)
+		return false, fmt.Errorf("codegen: check existence: %w", err)
 	}
 	return n > 0, nil
 }

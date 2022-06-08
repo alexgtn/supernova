@@ -5,8 +5,8 @@ package codegen
 import (
 	"time"
 
-	"github.com/alexgtn/supernova/ent/user"
-	"github.com/alexgtn/supernova/toent/schema"
+	"github.com/alexgtn/supernova/tools/ent/codegen/user"
+	"github.com/alexgtn/supernova/tools/ent/schema"
 )
 
 // The init function reads all schema descriptors with runtime code

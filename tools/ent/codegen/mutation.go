@@ -9,8 +9,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/alexgtn/supernova/ent/predicate"
-	"github.com/alexgtn/supernova/ent/user"
+	"github.com/alexgtn/supernova/tools/ent/codegen/predicate"
+	"github.com/alexgtn/supernova/tools/ent/codegen/user"
 
 	"entgo.io/ent"
 )
@@ -106,7 +106,7 @@ func (m UserMutation) Client() *Client {
 // it returns an error otherwise.
 func (m UserMutation) Tx() (*Tx, error) {
 	if _, ok := m.driver.(*txDriver); !ok {
-		return nil, errors.New("ent: mutation is not running in a transaction")
+		return nil, errors.New("codegen: mutation is not running in a transaction")
 	}
 	tx := &Tx{config: m.config}
 	tx.init()

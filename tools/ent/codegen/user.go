@@ -8,7 +8,7 @@ import (
 	"time"
 
 	"entgo.io/ent/dialect/sql"
-	"github.com/alexgtn/supernova/ent/user"
+	"github.com/alexgtn/supernova/tools/ent/codegen/user"
 )
 
 // User is the model entity for the User schema.
@@ -91,7 +91,7 @@ func (u *User) Update() *UserUpdateOne {
 func (u *User) Unwrap() *User {
 	tx, ok := u.config.driver.(*txDriver)
 	if !ok {
-		panic("ent: User is not a transactional entity")
+		panic("codegen: User is not a transactional entity")
 	}
 	u.config.driver = tx.drv
 	return u

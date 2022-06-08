@@ -2,7 +2,7 @@
 
 package runtime
 
-// The schema-stitching logic is generated in github.com/alexgtn/supernova/ent/runtime.go
+// The schema-stitching logic is generated in github.com/alexgtn/supernova/tools/ent/codegen/runtime.go
 
 const (
 	Version = "v0.10.2-0.20220428114225-0c8f9a977c99"           // Version of ent codegen.

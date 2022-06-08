@@ -9,8 +9,8 @@ import (
 	"entgo.io/ent/dialect/sql"
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/schema/field"
-	"github.com/alexgtn/supernova/ent/predicate"
-	"github.com/alexgtn/supernova/ent/user"
+	"github.com/alexgtn/supernova/tools/ent/codegen/predicate"
+	"github.com/alexgtn/supernova/tools/ent/codegen/user"
 )
 
 // UserDelete is the builder for deleting a User entity.
@@ -47,7 +47,7 @@ func (ud *UserDelete) Exec(ctx context.Context) (int, error) {
 		})
 		for i := len(ud.hooks) - 1; i >= 0; i-- {
 			if ud.hooks[i] == nil {
-				return 0, fmt.Errorf("ent: uninitialized hook (forgotten import ent/runtime?)")
+				return 0, fmt.Errorf("codegen: uninitialized hook (forgotten import codegen/runtime?)")
 			}
 			mut = ud.hooks[i](mut)
 		}
