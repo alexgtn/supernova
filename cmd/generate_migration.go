@@ -11,6 +11,7 @@ import (
 
 	"ariga.io/atlas/sql/migrate"
 	"ariga.io/atlas/sql/sqltool"
+	entsql "entgo.io/ent/dialect/sql"
 
 	"entgo.io/ent/dialect/sql/schema"
 	"entgo.io/ent/entc"
@@ -42,6 +43,12 @@ var migrateCmd = &cobra.Command{
 			log.Fatalln(err)
 		}
 		client := postgres.Open(cfg.DatabaseURL)
+		defer func(client *entsql.Driver) {
+			err := client.Close()
+			if err != nil {
+				log.Fatal("error closing client")
+			}
+		}(client)
 
 		// Inspect it and compare it with the graph.
 		m, err := schema.NewMigrate(client, schema.WithDir(d),
