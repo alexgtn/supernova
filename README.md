@@ -56,7 +56,7 @@ Optional
 
 ## TODO
 
-- [ ] Auth/AuthZ with Auth0 and grpc_auth middleware, or Auth https://casdoor.org/ AuthZ https://casbin.org/en/
+- [ ] Auth/AuthZ with Auth0 and grpc_auth middleware, or Auth https://casdoor.org/ AuthZ https://casbin.org/en/, or https://github.com/ory/keto
 - [x] Viper config
 - [x] gRPC request validation https://github.com/envoyproxy/protoc-gen-validate
 - [x] linter
