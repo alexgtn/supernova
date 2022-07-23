@@ -19,7 +19,7 @@ tasks:
   gen-schema:
     cmds:
       # wipe existing generated code
-      - find tools/ent/codegen -type f -delete
+      - find tools/ent/codegen -type f \( ! -iname "codegen.go" \) -delete
       # generate code
       - go run entgo.io/ent/cmd/ent generate ./tools/ent/schema --target ./tools/ent/codegen
 
