@@ -17,7 +17,7 @@ import (
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 
-	delivery "github.com/alexgtn/supernova/internal/delivery/grpc"
+	delivery "github.com/alexgtn/supernova/internal/delivery/transport/grpc"
 	"github.com/alexgtn/supernova/internal/infra/postgres"
 	"github.com/alexgtn/supernova/internal/infra/repository/user"
 	"github.com/alexgtn/supernova/internal/usecase"
