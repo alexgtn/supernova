@@ -7,7 +7,7 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
-	pb "github.com/alexgtn/supernova/tools/proto"
+	pb "github.com/alexgtn/supernova/internal/delivery/transport/grpc/gen/user/v1"
 
 	"github.com/alexgtn/supernova/internal/domain/user"
 	user_repo "github.com/alexgtn/supernova/internal/infra/repository/user"

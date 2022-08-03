@@ -1,0 +1,33 @@
+version: v1
+managed:
+  enabled: true
+  go_package_prefix:
+    default: github.com/alexgtn/supernova/internal/delivery/transport/grpc/gen
+    except:
+      - buf.build/googleapis/googleapis
+      - buf.build/envoyproxy/protoc-gen-validate
+plugins:
+  - name: go
+    out: internal/delivery/transport/grpc/gen
+    opt: paths=source_relative
+  - name: validate
+    out: internal/delivery/transport/grpc/gen
+    opt:
+      - lang=go
+      - paths=source_relative
+  - name: grpc-gateway
+    out: internal/delivery/transport/grpc/gen
+    opt:
+      - logtostderr=true
+      - paths=source_relative
+      - generate_unbound_methods=true
+  - name: openapiv2
+    out: docs
+    opt:
+      - logtostderr=true
+      - generate_unbound_methods=true
+  - name: go-grpc
+    out: internal/delivery/transport/grpc/gen
+    opt:
+      - paths=source_relative
+      - require_unimplemented_servers=false

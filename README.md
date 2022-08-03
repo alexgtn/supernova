@@ -25,6 +25,7 @@ GRPC Requirements:
 
 ```
 go install \
+    github.com/bufbuild/buf/cmd/buf@v1.7.0 \
     github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-grpc-gateway@latest \
     github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2@latest \
     google.golang.org/protobuf/cmd/protoc-gen-go@latest \

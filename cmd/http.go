@@ -18,8 +18,8 @@ import (
 	_ "github.com/jackc/pgx/v4/stdlib"
 	"google.golang.org/grpc"
 
+	pb "github.com/alexgtn/supernova/internal/delivery/transport/grpc/gen/user/v1"
 	http2 "github.com/alexgtn/supernova/internal/delivery/transport/http"
-	pb "github.com/alexgtn/supernova/tools/proto"
 )
 
 var httpPort = flag.Int("http-port", 8080, "The HTTP server port")
