@@ -5,16 +5,15 @@ Run initial setup commands
 
 ```
 mkdir postgres-data
-chmod u+x task atlas-linux-amd64
 ```
 
 ## Start service
 
-`./task main`
+`make main`
 
 gRPC gateway
 
-`./task http`
+`make http`
 
 ## Protobuf
 
@@ -35,24 +34,24 @@ go install \
 
 Generate ent db code 
 ```
-./task gen-schema
+make gen-schema
 ```
 
 Generate protobuf and API docs
 ```
-./task gen
+make gen
 ```
 
 ## Migrations
 ```
-./task generate-migration
-./task execute-migration
+make generate-migration
+make execute-migration
 ```
 
 Optional 
 ```
-./task validate-migration
-./task rehash-migration
+make validate-migration
+make rehash-migration
 ```
 
 ## TODO
