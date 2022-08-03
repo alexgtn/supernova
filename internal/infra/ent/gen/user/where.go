@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"entgo.io/ent/dialect/sql"
-	"github.com/alexgtn/supernova/tools/ent/codegen/predicate"
+	"github.com/alexgtn/supernova/internal/infra/ent/gen/predicate"
 )
 
 // ID filters vertices based on their ID field.

@@ -5,9 +5,9 @@ package enttest
 import (
 	"context"
 
-	"github.com/alexgtn/supernova/tools/ent/codegen"
+	"github.com/alexgtn/supernova/internal/infra/ent/gen"
 	// required by schema hooks.
-	_ "github.com/alexgtn/supernova/tools/ent/codegen/runtime"
+	_ "github.com/alexgtn/supernova/internal/infra/ent/gen/runtime"
 
 	"entgo.io/ent/dialect/sql/schema"
 )
@@ -24,13 +24,13 @@ type (
 	Option func(*options)
 
 	options struct {
-		opts        []codegen.Option
+		opts        []gen.Option
 		migrateOpts []schema.MigrateOption
 	}
 )
 
 // WithOptions forwards options to client creation.
-func WithOptions(opts ...codegen.Option) Option {
+func WithOptions(opts ...gen.Option) Option {
 	return func(o *options) {
 		o.opts = append(o.opts, opts...)
 	}
@@ -51,10 +51,10 @@ func newOptions(opts []Option) *options {
 	return o
 }
 
-// Open calls codegen.Open and auto-run migration.
-func Open(t TestingT, driverName, dataSourceName string, opts ...Option) *codegen.Client {
+// Open calls gen.Open and auto-run migration.
+func Open(t TestingT, driverName, dataSourceName string, opts ...Option) *gen.Client {
 	o := newOptions(opts)
-	c, err := codegen.Open(driverName, dataSourceName, o.opts...)
+	c, err := gen.Open(driverName, dataSourceName, o.opts...)
 	if err != nil {
 		t.Error(err)
 		t.FailNow()
@@ -66,10 +66,10 @@ func Open(t TestingT, driverName, dataSourceName string, opts ...Option) *codege
 	return c
 }
 
-// NewClient calls codegen.NewClient and auto-run migration.
-func NewClient(t TestingT, opts ...Option) *codegen.Client {
+// NewClient calls gen.NewClient and auto-run migration.
+func NewClient(t TestingT, opts ...Option) *gen.Client {
 	o := newOptions(opts)
-	c := codegen.NewClient(o.opts...)
+	c := gen.NewClient(o.opts...)
 	if err := c.Schema.Create(context.Background(), o.migrateOpts...); err != nil {
 		t.Error(err)
 		t.FailNow()

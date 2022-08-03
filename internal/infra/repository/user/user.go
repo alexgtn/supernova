@@ -5,7 +5,7 @@ import (
 
 	"github.com/pkg/errors"
 
-	ent "github.com/alexgtn/supernova/tools/ent/codegen"
+	ent "github.com/alexgtn/supernova/internal/infra/ent/gen"
 
 	errors2 "github.com/alexgtn/supernova/internal/domain/errors"
 	"github.com/alexgtn/supernova/internal/domain/user"

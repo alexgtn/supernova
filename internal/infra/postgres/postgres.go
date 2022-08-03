@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"log"
 
-	ent "github.com/alexgtn/supernova/tools/ent/codegen"
+	ent "github.com/alexgtn/supernova/internal/infra/ent/gen"
 
 	"entgo.io/ent/dialect"
 	entsql "entgo.io/ent/dialect/sql"
