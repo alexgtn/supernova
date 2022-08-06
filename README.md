@@ -1,19 +1,33 @@
-![](https://s1.gifyu.com/images/nLJguQ9---Imgur.gif)
+<p align="center">
+  <img width="400" src="gopher.png" />
+  <br />
+  Kudos to https://gopherize.me/ for the cute logo
+</p>
 
+## Supernova
 
-Run initial setup commands
+This repo provides:
+- boilerplate code based on best practices for kickstarting go projects
+- clean architecture based on [hexagonal architecture](https://herbertograca.com/2017/11/16/explicit-architecture-01-ddd-hexagonal-onion-clean-cqrs-how-i-put-it-all-together/)
+- gRPC API, Protobuf, HTTP gateway, codegen with [buf](https://github.com/bufbuild/buf), API documentation, [go-grpc-middleware](https://github.com/grpc-ecosystem/go-grpc-middleware) logging w/ [zap](https://github.com/uber-go/zap), message validation 
+- [Cobra](https://github.com/spf13/cobra) and [Viper](https://github.com/spf13/viper) integration
+- [golang-ci](https://github.com/golangci/golangci-lint) linter
+- CI config for Gitlab (wake me up when september.. when Github Actions catches up)
+- Docker & docker-compose: [traefik](https://github.com/traefik/traefik) proxy, Postgres w/ auto-backup to S3, Datadog metrics, [Watchtower](https://github.com/containrrr/watchtower) auto-deploy 
+- [ent](https://github.com/ent/ent) ORM, codegen, migrations
 
-```
-mkdir postgres-data
-```
 
 ## Start service
 
-`make main`
+```
+make main
+```
 
 gRPC gateway
 
-`make http`
+```
+make http
+```
 
 ## Protobuf
 
@@ -39,7 +53,7 @@ make gen-schema
 
 Generate protobuf and API docs
 ```
-make gen
+make gen-buf
 ```
 
 ## Migrations
@@ -56,9 +70,16 @@ make rehash-migration
 
 ## TODO
 
+- [ ] Cobra CMD for prod/dev env
 - [ ] Auth/AuthZ with Auth0 and grpc_auth middleware, or Auth https://casdoor.org/ AuthZ https://casbin.org/en/, or https://github.com/ory/keto
 - [x] Viper config
 - [x] gRPC request validation https://github.com/envoyproxy/protoc-gen-validate
 - [x] linter
 - [x] db transactions
 - [x] Gitlab CI
+
+<p align="center">
+  <img src="https://s1.gifyu.com/images/nLJguQ9---Imgur.gif" />
+  <br />
+  Oasis - Champagne Supernova
+</p>
